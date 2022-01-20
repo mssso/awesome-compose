@@ -17,8 +17,8 @@ services:
       - 15672:15672
       - 15671:15671
 
-  compose.ssosectest.link:
-    hostname: compose.ssosectest.link
+  ctrl.ssosec.com:
+    hostname: ctrl.ssosec.com
     image: surimadhira/openam:dev
     restart: on-failure
     volumes:
