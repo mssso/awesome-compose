@@ -1,6 +1,6 @@
 services:
   postgres:
-    image: surimadhira/postgres:0.9
+    image: ssosecsystems/postgres:dev
     restart: on-failure
     volumes:
       - db-data:/var/lib/postgresql/data
@@ -10,7 +10,7 @@ services:
       - 5432
 
   rabbitmq:
-    image: surimadhira/rabbitmq:0.9
+    image: ssosecsystems/rabbitmq:dev
     restart: on-failure
     ports:
       - 5672:5672
@@ -21,7 +21,7 @@ services:
       
   am:
     hostname: am
-    image: surimadhira/openam:0.9
+    image: ssosecsystems/openam:dev
     restart: on-failure
     volumes:
       - am-data:/usr/ssosec/config
@@ -34,26 +34,34 @@ services:
       - rabbitmq
 
  webclient:
-    image: surimadhira/webclient:0.9
+    image: ssosecsystems/webclient:dev
     ports:
       - 8888:8888
     depends_on:
       - am
 
+  trust:
+    image: ssosecsystems/rna:dev
+    ports:
+      - 9999:9999
+    depends_on:
+      - am
+      
   reporting:
-    image: surimadhira/rna:0.9
+    image: ssosecsystems/rna_sb:dev
     ports:
       - 8301:8301
     depends_on:
       - am
-
+      
   amqp:
-    image: surimadhira/amqp:0.9
+    image: ssosecsystems/amqp_sb:dev
     depends_on:
       - am
 
+
   rmqconsumer:
-    image: surimadhira/rmqconsumer:0.9
+    image: ssosecsystems/rmqconsumer:dev
     depends_on:
       - am
       
