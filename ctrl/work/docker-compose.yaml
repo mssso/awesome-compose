@@ -33,7 +33,7 @@ services:
     depends_on:
       - rabbitmq
 
- webclient:
+  webclient:
     image: ssosecsystems/webclient:dev
     ports:
       - 8888:8888
